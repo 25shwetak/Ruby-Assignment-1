@@ -1,7 +1,7 @@
 puts "What is your name ?"
 name = gets
 
-print "Good Luck ",name
+puts "Good Luck #{name}"
 
 words = ['rainbow', 'computer', 'science', 'programming', 'python', 'mathematics', 'player', 'condition', 'reverse', 'water', 'board', 'geeks']
 
@@ -22,9 +22,11 @@ while turns > 0
     end
   end
 
+  puts " "
+  
   if failed == 0
-    print "You win"
-    print "The word is : ", word
+    puts "You win"
+    puts "The word is : #{word}"
     break
   end
 
@@ -41,10 +43,10 @@ while turns > 0
 
   if i==word.length
     turns -= 1
-    print "Wrong\n"
-    print "You have ",turns," more guesses\n"
+    puts "Wrong\n"
+    puts "You have #{turns} more guesses\n"
     if turns == 0
-      print "You loose"
+      puts "You loose"
     end
   end
 end
