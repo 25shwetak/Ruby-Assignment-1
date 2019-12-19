@@ -6,7 +6,7 @@
 5. primenumbers.rb : A program to display whether a number is prime or not.
 6. regex.rb : Write Regex for mobile number, email address, name, gender(M / F), amount, IFSC code, Pan Cad Number and GST number.
 7. reverse_alphabets.rb : A program for printing a-z albhabets in reverse order.
-8. schoil_level.rb : A program for students to print their school level according to grade
+8. school_level.rb : A program for students to print their school level according to grade
 	e.g -
 	if grade is between 1-5 return elementary
 	if grade is between 6-8 return middle school
