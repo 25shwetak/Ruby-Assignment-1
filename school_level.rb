@@ -1,11 +1,11 @@
 puts "Enter grade"
 x = gets.to_i
 if x.between?(1,5)
-	puts "elementary"
+  puts "elementary"
 elsif x.between?(6,8)
-	puts "middle school"
+  puts "middle school"
 elsif x.between?(9,12)
-	puts "high school"
+  puts "high school"
 else
-	puts "college"
+  puts "college"
 end
