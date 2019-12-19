@@ -19,7 +19,7 @@ while turns > 0
     else
       print "_ "
       failed +=1
-    end	
+    end
   end
 
   if failed == 0
@@ -27,25 +27,25 @@ while turns > 0
     print "The word is : ", word
     break
   end
-	
+
   puts "Guess a character :"
   guess = gets
   guesses += guess
   i=0
-  while i<word.length 
+  while i<word.length
     if guess[0]==word[i]
       break
     end
     i+=1
   end
-	
+
   if i==word.length
     turns -= 1
     print "Wrong\n"
     print "You have ",turns," more guesses\n"
     if turns == 0
       print "You loose"
-    end	
+    end
   end
 end
 

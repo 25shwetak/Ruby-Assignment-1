@@ -3,7 +3,7 @@ n=gets
 
 if n.match(/\A[1-9][0-9]{9}\Z/)
   print "A Mobile number"
-else 
+else
   print "Not a mobile number"
 end
 
@@ -15,7 +15,7 @@ n=gets
 
 if n.match(/\A[a-zA-Z0-9]+[.|_]*[a-zA-Z0-9]+[@][a-zA-Z]+[.][a-z]{3}\Z/)
   print "A valid email address"
-else 
+else
   print "Not a valid email address"
 end
 
@@ -27,7 +27,7 @@ n=gets
 
 if n.match(/\A[a-zA-Z]+\s[a-zA-Z]+\Z/)
   print "A valid Name"
-else 
+else
   print "Not a valid Name"
 end
 
@@ -48,7 +48,7 @@ n=gets
 
 if n.match(/\A[0-9]*[.]?[0-9]+\Z/)
   print "A valid Amount"
-else 
+else
   print "Not a valid Amount"
 end
 
@@ -60,7 +60,7 @@ n=gets
 
 if n.match(/\A[A-Z]+{4}[0][0-9]+{6}\Z/)
   print "A valid IFSC Code"
-else 
+else
   print "Not a valid IFSC Code"
 end
 
@@ -73,7 +73,7 @@ n=gets
 
 if n.match(/\A[A-Z]+{5}[0-9]+{4}[A-Z]\Z/)
   print "A valid Pan Card Number"
-else 
+else
   print "Not a valid Pan Card number"
 end
 
@@ -86,7 +86,7 @@ n=gets
 
 if n.match(/\A[0-9]+{2}[A-Z]+{5}[0-9]+{4}[A-Z][0-9][Z][0-9]\Z/)
   print "A valid GST Number"
-else 
+else
   print "Not a valid GST Number"
 end
 
