@@ -8,8 +8,6 @@ class Restaurant
   public
   def self.menu_card_items
     i = 1
-    puts "Item   ->   price"
-    puts " "
     @@menu_card.each do |key,value|
       p "#{i} : #{key}  ->  #{@@menu_card[key]}"
       i += 1
@@ -18,9 +16,7 @@ class Restaurant
   end
 
 
-  def self.order_items
-    puts "Enter ID of food item you want to order : "
-    food = gets.to_i
+  def self.order_items(food)
     if @@count[food]>0
       @@status[food] = "ordered"
       @@my_cart.push(food)
@@ -82,9 +78,13 @@ class Restaurant
       option = gets.to_i
       case option
       when 1
+      	puts "Item   ->   price"
+    		puts " "
         Restaurant.menu_card_items
       when 2
-        Restaurant.order_items
+        puts "Enter ID of food item you want to order : "
+    		food = gets.to_i
+        Restaurant.order_items(food)
       when 3
         Restaurant.check_availability
       when 4
