@@ -1,133 +1,168 @@
 class Account
-	@@number = 23456789101
-	@@balance = 0
-	def initialize
-		@acc_number = @@number
-	end
+  @@number = 100
 
-	def open_account
-		@@number += 1
-		@acc_number = @@number
-	end
+  attr_accessor :account_number
+  attr_reader :balance
 
-	def deposit_money(amount)
-		@@balance += amount
-	end
+  def initialize
+    @account_number = @@number
+    @balance = 0
+  end
 
-	def withdraw_money(amount)
-		if @@balance <= 0 || @@balance <= amount
-			return false
-		else
-			@@balance -= amount
-			return true
-		end
-	end
+  def open_account
+    @@number += 1
+    @account_number = @@number
+  end
 
-	def get_balance
-		return @@balance
-	end
+  def deposit_money(amount)
+    @balance += amount
+  end
 
-	def interest(rate,time)
-		interst = (@@balance*rate*time)/100
-	end
+  def withdraw_money(amount)
+    return false if @balance <= 0 || @balance <= amount
+    @balance -= amount
+    true
+  end
 
-	def type(x)
-		@@typee = x
-	end
+  def interest(balance, rate, time)
+    (balance * rate * time) / 100
+  end
 
-	def give_type
-		return @@typee
-	end
+  def type(account_type)
+    @@typee = account_type
+  end
+
+  def give_type
+   @@typee
+  end
 
 end
 
 class Current_Account < Account
 
-	def interest(rate,time)
-		interst = super
-	end
+  def interest(balance, rate, time)
+    super
+  end
 
 end
 
 class Saving_Account < Account
 
-	def interest(rate,time)
-		interst = super
-	end
+  def interest(balance, rate, time)
+    super
+  end
 
 end
 
-loop do 
+def openAccount
+  puts "Enter your name : "
+  name = gets.chomp
+  puts "Which type of account you want to open ?"
+  puts "1. Savings"
+  puts "2. Current"
+  opt = gets.chomp.to_i
 
-	puts "*****MENU*****"
-	puts "1. Open Account"
-	puts "2. Deposit Money"
-	puts "3. Withdraw Money"
-	puts "4. Get Balance"
-	puts "5. Check Amount after rate of interest"
-	puts "6. Exit"
+  case opt
+  when 1
+    user_object = Saving_Account.new
+    user_object.type(1)
+    account_num = user_object.open_account
+    puts "Hi #{name}, your Savings Account has been opened and your account number is #{account_num} ."
+    return user_object
+  when 2
+    user_object = Current_Account.new
+    user_object.type(2)
+    account_num = user_object.open_account
+    puts "Hi #{name}, your Current Account has been opened and your account number is #{account_num} ."
+    return user_object
+  else
+    puts "error"
+  end
+end
 
-	option = gets.to_i
+users = []
 
-	obj = Account.new
+puts "How many custumers you want ?"
+count = gets.to_i
+for i in 0..count-1 do
+  users.push(openAccount)
+end
 
-	case option
-	when 1
-		p "Enter your name : "
-		name = gets.chomp
-		p "Which type of account you want to open ?"
-		p "1. Savings"
-		p "2. Current"
-		opt = gets.chomp.to_i
-		acc_num = obj.open_account
-		case opt
-		when 1
-			p "Hi #{name}, your Savings Account has been opened and your account number is #{acc_num} ."
-			obj.type(1)
-		when 2
-			p "Hi #{name}, your Current Account has been opened and your account number is #{acc_num} ."
-			obj.type(2)
-		else
-			p "error"
-		end
+def show_all_users(users)
+  users.each do |user|
+    puts "#{user.account_number} , #{user.balance}"
+  end
 
-	when 2
-		p "Enter amount you want to deposit : "
-		amount = gets.to_i
-		obj.deposit_money(amount)
+end
 
-	when 3
-		p "Enter amount you want to withdraw : "
-		amount = gets.to_i
-		value = obj.withdraw_money(amount)
-		if value == false
-			p "Sorry! You dont have sufficient balance to withdraw"
-		end
+int = 0
+loop do
+  puts "*****MENU*****"
+  puts "1. Deposit Money"
+  puts "2. Withdraw Money"
+  puts "3. Get Balance"
+  puts "4. Check Amount after rate of interest"
+  puts "5. Show all users details"
+  puts "6. Switch"
+  puts "7. Exit"
 
-	when 4
-		bal = obj.get_balance
-		p "Your account balance is : #{bal}"
+  option = gets.to_i
 
-	when 5
-		optt = obj.give_type
-  	if optt == 1
-  		p "Enter months for which you want to calculate interest : "
-  		month = gets.to_i
-  		save_obj = Saving_Account.new
-  		interest = save_obj.interest(r=0.18,month)
-  		p "Amount after calculating interest : #{interest}"
+  case option
+  when 1
+    puts "Enter amount you want to deposit : "
+    amount = gets.chomp.to_i
+    users[int].deposit_money(amount)
 
-  	else
-  		p "Enter months for which you want to calculate interest : "
-  		month = gets.to_i
-  		cur_obj = Current_Account.new
-  		interest = cur_obj.interest(r=0.25,month)
-  		p "Amount after calculating interest : #{interest}"
+  when 2
+    puts "Enter amount you want to withdraw : "
+    amount = gets.chomp.to_i
+    value = users[int].withdraw_money(amount)
+    if value == false
+      puts "Sorry! You dont have sufficient balance to withdraw"
+    end
 
-  	end
-	end
+  when 3
+    puts "Your account balance is : #{users[int].balance}"
 
-	if option == 6
-		break
-	end
+  when 4
+    optt = users[int].give_type
+    if optt == 1
+      puts "Enter months for which you want to calculate interest : "
+      month = gets.to_i
+      save_obj = Saving_Account.new
+      interest = save_obj.interest(users[int].balance, r=0.18, month)
+      puts "Amount after calculating interest : #{interest}"
+
+    else
+      puts "Enter months for which you want to calculate interest : "
+      month = gets.to_i
+      cur_obj = Current_Account.new
+      interest = cur_obj.interest(users[int].balance, r=0.25, month)
+      puts "Amount after calculating interest : #{interest}"
+
+    end
+
+  when 5
+    puts "Account Number , Balance"
+    show_all_users(users)
+
+  when 6
+    puts "Enter account number you want to switch : "
+    acc_num = gets.to_i
+    tempacc_num = acc_num
+    acc_num -= 101
+
+    if acc_num >= 0 && acc_num <= users.size-1
+      int = acc_num
+      puts "Switched to account number #{tempacc_num} "
+    else
+      puts "Invalid acc number"
+    end
+  end
+
+  if option == 7
+    flag = true
+    break
+  end
 end
