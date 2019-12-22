@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Account
   @@number = 100
 
@@ -20,6 +22,7 @@ class Account
 
   def withdraw_money(amount)
     return false if @balance <= 0 || @balance <= amount
+
     @balance -= amount
     true
   end
@@ -33,33 +36,28 @@ class Account
   end
 
   def give_type
-   @@typee
+    @@typee
   end
-
 end
 
 class Current_Account < Account
-
   def interest(balance, rate, time)
     super
   end
-
 end
 
 class Saving_Account < Account
-
   def interest(balance, rate, time)
     super
   end
-
 end
 
 def openAccount
-  puts "Enter your name : "
+  puts 'Enter your name : '
   name = gets.chomp
-  puts "Which type of account you want to open ?"
-  puts "1. Savings"
-  puts "2. Current"
+  puts 'Which type of account you want to open ?'
+  puts '1. Savings'
+  puts '2. Current'
   opt = gets.chomp.to_i
 
   case opt
@@ -68,23 +66,23 @@ def openAccount
     user_object.type(1)
     account_num = user_object.open_account
     puts "Hi #{name}, your Savings Account has been opened and your account number is #{account_num} ."
-    return user_object
+    user_object
   when 2
     user_object = Current_Account.new
     user_object.type(2)
     account_num = user_object.open_account
     puts "Hi #{name}, your Current Account has been opened and your account number is #{account_num} ."
-    return user_object
+    user_object
   else
-    puts "error"
+    puts 'error'
   end
 end
 
 users = []
 
-puts "How many custumers you want ?"
+puts 'How many custumers you want ?'
 count = gets.to_i
-for i in 0..count-1 do
+(0..count - 1).each do |_i|
   users.push(openAccount)
 end
 
@@ -92,35 +90,32 @@ def show_all_users(users)
   users.each do |user|
     puts "#{user.account_number} , #{user.balance}"
   end
-
 end
 
 int = 0
 loop do
-  puts "*****MENU*****"
-  puts "1. Deposit Money"
-  puts "2. Withdraw Money"
-  puts "3. Get Balance"
-  puts "4. Check Amount after rate of interest"
-  puts "5. Show all users details"
-  puts "6. Switch"
-  puts "7. Exit"
+  puts '*****MENU*****'
+  puts '1. Deposit Money'
+  puts '2. Withdraw Money'
+  puts '3. Get Balance'
+  puts '4. Check Amount after rate of interest'
+  puts '5. Show all users details'
+  puts '6. Switch'
+  puts '7. Exit'
 
   option = gets.to_i
 
   case option
   when 1
-    puts "Enter amount you want to deposit : "
+    puts 'Enter amount you want to deposit : '
     amount = gets.chomp.to_i
     users[int].deposit_money(amount)
 
   when 2
-    puts "Enter amount you want to withdraw : "
+    puts 'Enter amount you want to withdraw : '
     amount = gets.chomp.to_i
     value = users[int].withdraw_money(amount)
-    if value == false
-      puts "Sorry! You dont have sufficient balance to withdraw"
-    end
+    puts 'Sorry! You dont have sufficient balance to withdraw' if value == false
 
   when 3
     puts "Your account balance is : #{users[int].balance}"
@@ -128,36 +123,36 @@ loop do
   when 4
     optt = users[int].give_type
     if optt == 1
-      puts "Enter months for which you want to calculate interest : "
+      puts 'Enter months for which you want to calculate interest : '
       month = gets.to_i
       save_obj = Saving_Account.new
-      interest = save_obj.interest(users[int].balance, r=0.18, month)
+      interest = save_obj.interest(users[int].balance, r = 0.18, month)
       puts "Amount after calculating interest : #{interest}"
 
     else
-      puts "Enter months for which you want to calculate interest : "
+      puts 'Enter months for which you want to calculate interest : '
       month = gets.to_i
       cur_obj = Current_Account.new
-      interest = cur_obj.interest(users[int].balance, r=0.25, month)
+      interest = cur_obj.interest(users[int].balance, r = 0.25, month)
       puts "Amount after calculating interest : #{interest}"
 
     end
 
   when 5
-    puts "Account Number , Balance"
+    puts 'Account Number , Balance'
     show_all_users(users)
 
   when 6
-    puts "Enter account number you want to switch : "
+    puts 'Enter account number you want to switch : '
     acc_num = gets.to_i
     tempacc_num = acc_num
     acc_num -= 101
 
-    if acc_num >= 0 && acc_num <= users.size-1
+    if acc_num >= 0 && acc_num <= users.size - 1
       int = acc_num
       puts "Switched to account number #{tempacc_num} "
     else
-      puts "Invalid acc number"
+      puts 'Invalid acc number'
     end
   end
 
