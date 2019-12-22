@@ -3,27 +3,15 @@
 # module
 module CheckApplicability
   def loan_applicability?(population, gdp, states, state)
-    if population > 200_000 && gdp >= 20_000 && states >= 5 && state == 'developing'
-      return true
-    end
-
-    false
+    population > 200_000 && gdp >= 20_000 && states >= 5 && state == 'developing'
   end
 
   def seat_applicability?(population, gdp, states, state)
-    if population > 200_000 && gdp >= 10_000 && states >= 8 && state == 'developed'
-      return true
-    end
-
-    false
+    population > 200_000 && gdp >= 10_000 && states >= 8 && state == 'developed'
   end
 
   def win_war?(population, states, army_strength)
-    if population > 50_000 && states >= 10 && army_strength >= 20_000
-      return true
-    end
-
-    false
+    population > 50_000 && states >= 10 && army_strength >= 20_000
   end
 end
 
