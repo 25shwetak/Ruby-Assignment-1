@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# class
 class Account
   @@number = 100
 
@@ -32,27 +33,29 @@ class Account
   end
 
   def type(account_type)
-    @@typee = account_type
+    @typee = account_type
   end
 
   def give_type
-    @@typee
+    @typee
   end
 end
 
-class Current_Account < Account
+# class
+class CurrentAccount < Account
   def interest(balance, rate, time)
     super
   end
 end
 
-class Saving_Account < Account
+# class
+class SavingAccount < Account
   def interest(balance, rate, time)
     super
   end
 end
 
-def openAccount
+def open_account
   puts 'Enter your name : '
   name = gets.chomp
   puts 'Which type of account you want to open ?'
@@ -62,13 +65,13 @@ def openAccount
 
   case opt
   when 1
-    user_object = Saving_Account.new
+    user_object = SavingAccount.new
     user_object.type(1)
     account_num = user_object.open_account
     puts "Hi #{name}, your Savings Account has been opened and your account number is #{account_num} ."
     user_object
   when 2
-    user_object = Current_Account.new
+    user_object = CurrentAccount.new
     user_object.type(2)
     account_num = user_object.open_account
     puts "Hi #{name}, your Current Account has been opened and your account number is #{account_num} ."
@@ -83,7 +86,7 @@ users = []
 puts 'How many custumers you want ?'
 count = gets.to_i
 (0..count - 1).each do |_i|
-  users.push(openAccount)
+  users.push(open_account)
 end
 
 def show_all_users(users)
@@ -122,21 +125,19 @@ loop do
 
   when 4
     optt = users[int].give_type
+    puts optt
+    puts 'Enter months for which you want to calculate interest : '
+    month = gets.to_i
     if optt == 1
-      puts 'Enter months for which you want to calculate interest : '
-      month = gets.to_i
-      save_obj = Saving_Account.new
-      interest = save_obj.interest(users[int].balance, r = 0.18, month)
-      puts "Amount after calculating interest : #{interest}"
+      save_obj = SavingAccount.new
+      interest = save_obj.interest(users[int].balance, 0.18, month)
 
     else
-      puts 'Enter months for which you want to calculate interest : '
-      month = gets.to_i
-      cur_obj = Current_Account.new
-      interest = cur_obj.interest(users[int].balance, r = 0.25, month)
-      puts "Amount after calculating interest : #{interest}"
+      cur_obj = CurrentAccount.new
+      interest = cur_obj.interest(users[int].balance, 0.25, month)
 
     end
+    puts "Amount after calculating interest : #{interest}"
 
   when 5
     puts 'Account Number , Balance'
@@ -156,8 +157,5 @@ loop do
     end
   end
 
-  if option == 7
-    flag = true
-    break
-  end
+  break if option == 7
 end
